@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <ul>
+        {% for registration in registrations %}
+   
+            <h1>Hi {{ registration.username }}</h1> 
+
+        {% endfor %}
+    </ul>
+</body>
+</html>
