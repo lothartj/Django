@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border: 1px solid black; position: static;">
   <a class="navbar-brand" href="#" style="border-radius: 5px; padding: 5px;">Retro</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#" style="border-radius: 5px; border: 1px solid rgb(20, 204, 201); padding: 5px; margin-right: 5px;">Categories</a>
+        <a class="nav-link" href="{% url 'user_image' %}" style="border-radius: 5px; border: 1px solid rgb(20, 204, 201); padding: 5px; margin-right: 5px;">Input Image</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" style="border-radius: 5px; border: 1px solid rgb(20, 204, 201); padding: 5px;margin-right: 5px;">Retro Business</a>
@@ -26,7 +26,8 @@
         <a class="nav-link" href="#" style="border-radius: 5px; border: 1px solid rgb(20, 204, 201); padding: 5px;margin-right: 5px;">Teach on Retro</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0 ml-auto">
+    <form class="form-inline my-2 my-lg-0 ml-auto" method="POST">
+      {% csrf_token %}
         <a href="{% url 'user_login' %}" style="border-radius: 5px; border: 1px solid rgb(20, 204, 201); padding: 5px;margin-right: 5px;">Login</a>
         <a href="{% url 'user_register' %}" style="border-radius: 5px; border: 1px solid rgb(20, 204, 201); padding: 5px;margin-right: 5px;">Register</a>
       <input class="form-control mr-sm-2" type="search" placeholder="Search for anything" aria-label="Search">
@@ -34,7 +35,10 @@
     </form>
   </div>
 </nav>
-
+{% for image in images %}
+  <img src="{{ image.imageField.url }}" alt="{{ image.imageName }}">
+  <p>{{ image.imageDescription }}</p>
+{% endfor %}
 <!-- Add Bootstrap JS and jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

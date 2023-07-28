@@ -6,3 +6,9 @@ class Register(models.Model):
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     password2 = models.CharField(max_length=50)
+    last_login = models.DateTimeField(auto_now=True)
+
+class imageInput(models.Model):
+    imageName = models.CharField(max_length=50)
+    imageDescription = models.CharField(max_length=500)
+    imageField = models.ImageField(upload_to='images/')
