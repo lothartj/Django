@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">
+            <input type="text" name="name">Name
+        </label>
+        <label for="">
+            <input type="text" name="surname">Surname
+        </label>
+        <label for="">
+            <input type="text"name='email'>email
+        </label>
+        <label for="">
+            <input type="text" name="password">password
+        </label>
+        <label for="">
+            <input type="text" name="password2">confirm password
+        </label>
+        <button type="submit">Register</button>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </form>
+</body>
+</html>

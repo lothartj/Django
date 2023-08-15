@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+    {% csrf_token %}
+        <label for="">
+            <input type="text" placeholder="Enter Task" name="task">
+        </label>
+        <button type="submit">Assign task</button>
+    </form>
+    {% for todo in todos%}
+    <li>
+        {{todo.task}}
+    </li>
+    {% endfor %}
+</body>
+</html>
