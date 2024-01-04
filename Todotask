@@ -1,0 +1,51 @@
+import streamlit as st
+import sqlite3
+
+# Function to create a database table if it doesn't exist
+def create_table():
+    connection = sqlite3.connect("todo.db")
+    cursor = connection.cursor()
+    cursor.execute("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, task TEXT)")
+    connection.commit()
+    connection.close()
+
+# Function to insert a task into the database
+def add_task(task):
+    connection = sqlite3.connect("todo.db")
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO tasks (task) VALUES (?)", (task,))
+    connection.commit()
+    connection.close()
+
+# Function to retrieve tasks from the database
+def get_tasks():
+    connection = sqlite3.connect("todo.db")
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
+    connection.close()
+    return tasks
+
+# Streamlit UI
+def main():
+    st.title("ToDo List App")
+
+    create_table()
+
+    # Sidebar for adding tasks
+    task_input = st.sidebar.text_input("Add Task:")
+    if st.sidebar.button("Add"):
+        if task_input:
+            add_task(task_input)
+
+    # Display tasks
+    tasks = get_tasks()
+    st.write("## Tasks")
+    if tasks:
+        for task_id, task_text in tasks:
+            st.write(f"- Task {task_id}: {task_text}")
+    else:
+        st.write("No tasks yet.")
+
+if __name__ == "__main__":
+    main()
